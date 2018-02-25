@@ -1306,7 +1306,7 @@ Section partition.
     In a l -> In a (fst p) \/ In a (snd p).
 
   Proof.
-    induction l. auto.
+    induction l as [|? l0 IHl0]. auto.
     simpl. intro. destruct (partition f l0). destruct H.
     destruct (f a0); simpl; auto.
     destruct (f a0); simpl in *; destruct IHl0; auto.
@@ -1315,7 +1315,7 @@ Section partition.
   Lemma partition_inleft : In a (fst (partition f l)) -> In a l.
 
   Proof.
-    induction l. auto.
+    induction l as [|? l0 IHl0]. auto.
     simpl. intro. destruct (partition f l0). destruct (f a0).
     destruct H; auto.
     right. apply IHl0. auto.
@@ -1324,7 +1324,7 @@ Section partition.
   Lemma partition_inright : In a (snd (partition f l)) -> In a l.
 
   Proof.
-    induction l. auto.
+    induction l as [|? l0 IHl0]. auto.
     simpl. intro. destruct (partition f l0). destruct (f a0).
     right. apply IHl0. auto.
     destruct H; auto.
@@ -1333,7 +1333,7 @@ Section partition.
   Lemma partition_left : In a (fst (partition f l)) -> f a = true.
 
   Proof.
-    induction l; simpl. auto.
+    induction l as [|? l0 IHl0]; simpl. auto.
     destruct (partition f l0). destruct (bool_dec (f a0) true).
     rewrite e. intro. destruct H.
     subst a0. hyp.
@@ -1344,7 +1344,7 @@ Section partition.
   Lemma partition_right : In a (snd (partition f l)) -> f a = false.
 
   Proof.
-    induction l; simpl. intuition.
+    induction l as [|? l0 IHl0]; simpl. intuition.
     destruct (partition f l0). destruct (bool_dec (f a0) true).
     rewrite e. apply IHl0.
     rewrite (not_true_is_false (f a0)). intro. destruct H.
