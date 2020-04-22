@@ -498,7 +498,7 @@ right; destruct a2 as [x2 | g2 k2].
 contradiction.
 simpl; rewrite in_map_iff; exists a1; split; trivial.
 inversion Sub as [u | u1 u2 K1 K2].
-subst u; simpl; rewrite <- H5; assumption.
+subst u; simpl; (rewrite <- H4 || (* compatibility: *) rewrite <- H5); assumption.
 subst u1 u2; apply trans_clos_is_trans with (projection (Term f l2)); trivial.
 apply trans_incl with (one_step R); trivial.
 intros u1 u2 K; left; trivial.
